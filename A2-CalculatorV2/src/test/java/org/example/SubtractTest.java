@@ -11,7 +11,7 @@ public class SubtractTest {
 
     @BeforeEach
     void beforeEach() {
-        calculator = new Calculator();
+        calculator = new Calculator(System.in);
     }
 
     @Test

@@ -1,0 +1,10 @@
+a.	As a user I want to be able to enter numbers to begin a calculation                                     TODO
+b.	As a user I want to be able to perform the addition function on two numbers                             done
+c.	As a user I want to be able to perform the multiplication function on two numbers                       done
+d.	As a user I want to be able to perform the subtraction function on two numbers                          done
+e.	As a user I want to be able to perform the division function on two numbers                             done
+f.	As a user I want to be able to undo an input entry to enter the correct intended input                  TODO
+g.	As a user I want to be able to enter decimals into the calculator to perform precise calculations       TODO
+h.	As a user I want to be able to perform the square root function                                         done
+i.	As a user I want to be able to perform the square function                                              done
+j.	As a user I want to be able to perform the cube function                                                done
