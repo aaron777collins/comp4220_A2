@@ -1,10 +1,10 @@
-a.	As a user I want to be able to enter numbers to begin a calculation                                     TODO
-b.	As a user I want to be able to perform the addition function on two numbers                             done
-c.	As a user I want to be able to perform the multiplication function on two numbers                       done
-d.	As a user I want to be able to perform the subtraction function on two numbers                          done
-e.	As a user I want to be able to perform the division function on two numbers                             done
-f.	As a user I want to be able to undo an input entry to enter the correct intended input                  TODO
-g.	As a user I want to be able to enter decimals into the calculator to perform precise calculations       TODO
-h.	As a user I want to be able to perform the square root function                                         done
-i.	As a user I want to be able to perform the square function                                              done
-j.	As a user I want to be able to perform the cube function                                                done
+a.	As a user, I want to be able to enter some numbers to perform a calculation     DONE
+b.	As a user, I want to be able to add two numbers to find out the answer          DONE
+c.	As a user, I want to be able to multiply two numbers to find out the answer     DONE
+d.	As a user, I want to be able to subtract two numbers to find out the answer     DONE
+e.	As a user, I want to be able to divide two numbers to find out the answer       DONE
+f.	As a user, I want to be able to undo an input to correct my mistakes            DONE
+g.	As a user, I want to be able to use floating point numbers to have precise calculations DONE
+h.	As a user, I want to be able to square a number to find out the answer          Done
+i.	As a user, I want to be able to square root a number to find out the answer     Done
+j.	As a user, I want to be able to cube a number to find out the answer            Done

@@ -12,6 +12,9 @@ public class Calculator {
 
     private InputStream inputStream;
     private Scanner scanner;
+
+    public boolean calculating = true;
+
     public Calculator(InputStream inputStream) {
         this.inputStream = inputStream;
         this.scanner = new Scanner(inputStream);
@@ -25,8 +28,6 @@ public class Calculator {
 
     // Asks the user for the input operation and then runs the proper functions and prints a result. It will keep running until they exit.
     public void doCalculations() {
-
-        boolean calculating = true;
 
         while(calculating) {
             System.out.println("Please enter an input operation from one of the following options or 'e' to exit:");
