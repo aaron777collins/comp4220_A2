@@ -11,7 +11,7 @@ public class EnterPreciseNumTest {
 
     @Test
     void enterPreciseNumbersTest() {
-        String input = "a\n1.999999\nn\n2.444444\nn\ne\n";
+        String input = "1\n2\n1\n1.999999\nn\n2.444444\nn\n2\n";
         InputStream mockInputStream = new ByteArrayInputStream(input.getBytes());
         Calculator calculator = new Calculator(mockInputStream);
 

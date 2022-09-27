@@ -1,137 +1,186 @@
 package org.example;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
-
-    private InputStream inputStream;
-    private Scanner scanner;
-
-    public boolean calculating = true;
+    Scanner scanner;
+    public boolean calculating = false;
 
     public Calculator(InputStream inputStream) {
-        this.inputStream = inputStream;
-        this.scanner = new Scanner(inputStream);
+        scanner = new Scanner(inputStream);
     }
 
-    public static void main(String[] args) {
-        Calculator calc = new Calculator(System.in);
-        calc.doCalculations();
-
+    public float multiply(float a, float b){
+        return a*b;
     }
 
-    // Asks the user for the input operation and then runs the proper functions and prints a result. It will keep running until they exit.
-    public void doCalculations() {
+    public float add(float a, float b){return a+b;}
 
-        while(calculating) {
-            System.out.println("Please enter an input operation from one of the following options or 'e' to exit:");
-            System.out.println("'a' - Add");
-            System.out.println("'s' - Subtract");
-            System.out.println("'m' - Multiply");
-            System.out.println("'d' - Divide");
-            System.out.println("'sqrt' - Square Root");
-            System.out.println("'sq' - Square");
-            System.out.println("'c' - Cube");
+    public float subtract(float a, float b){return a-b;}
 
-            String res = scanner.next();
+    public float divide(float a, float b){return a/b;}
 
-            try {
-                String lowerRes = res.toLowerCase();
-                if(lowerRes.equals("a")) {
-                    Float[] inputs = get2Floats();
-                    Float result = add(inputs[0], inputs[1]);
-                    System.out.println(inputs[0].toString() + " + " + inputs[1] + " = " + result.toString());
-                } else if (lowerRes.equals("s")) {
-                    Float[] inputs = get2Floats();
-                    Float result = subtract(inputs[0], inputs[1]);
-                    System.out.println(inputs[0].toString() + " - " + inputs[1] + " = " + result.toString());
-                } else if (lowerRes.equals("m")) {
-                    Float[] inputs = get2Floats();
-                    Float result = multiply(inputs[0], inputs[1]);
-                    System.out.println(inputs[0].toString() + " * " + inputs[1] + " = " + result.toString());
-                } else if (lowerRes.equals("d")) {
-                    Float[] inputs = get2Floats();
-                    Float result = divide(inputs[0], inputs[1]);
-                    System.out.println(inputs[0].toString() + " / " + inputs[1] + " = " + result.toString());
-                } else if (lowerRes.equals("sqrt")) {
-                    Float input = get1FloatUndoable("");
-                    Float result = sqrt(input);
-                    System.out.println("sqrt(" + input.toString() + ") = " + result.toString());
-                } else if (lowerRes.equals("sq")) {
-                    Float input = get1FloatUndoable("");
-                    Float result = square(input);
-                    System.out.println("sq(" + input.toString() + ") = " + result.toString());
-                } else if (lowerRes.equals("c")) {
-                    Float input = get1FloatUndoable("");
-                    Float result = cube(input);
-                    System.out.println("cube(" + input.toString() + ") = " + result.toString());
-                } else if (lowerRes.equals("e")) {
-                    calculating = false;
-                }
-            } catch(InputMismatchException e) {
-                System.out.println("Invalid input! Going back to the main menu..");
-            }
+    public float cube(float a){
+        return a*a*a;
+    }
 
+    public float square(float a){
+        return a*a;
+    }
+
+    public float sqrt(float a){
+        return (float) Math.sqrt(a);
+    }
+
+    public float GetOperation(){
+        float output = 0f;
+        int numOfDigits;
+        System.out.println("How many numbers would you like to compute?\nEnter 1 or 2...\n");
+
+        numOfDigits = scanner.nextInt();
+        while(numOfDigits != 1 && numOfDigits != 2){
+            System.out.println("Sorry! That isn't a valid entry. Please enter 1 or 2.\n");
+            numOfDigits = scanner.nextInt();
         }
 
+        int selection;
+        if(numOfDigits == 1){
+            System.out.println("Here are the options for one number entry:");
+            System.out.println("1: Square\n2: Cube\n3: Square Root");
+            selection = scanner.nextInt();
+
+            while(selection < 1 || selection > 3) {
+                System.out.println("Sorry! That isn't a valid entry. Please enter 1, 2 or 3");
+                selection = scanner.nextInt();
+            }
+
+            float inputA;
+
+            switch(selection) {
+                case 1:
+                    System.out.println("Please enter a number to square: ");
+                    inputA = TakeOneInput();
+                    output = square(inputA);
+                    PrintResult(output);
+                    break;
+                case 2:
+                    System.out.println("Please enter a number to cube: ");
+                    inputA = TakeOneInput();
+                    output = cube(inputA);
+                    PrintResult(output);
+                    break;
+                case 3:
+                    System.out.println("Please enter a number to square root: ");
+                    inputA = TakeOneInput();
+                    output = sqrt(inputA);
+                    PrintResult(output);
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            System.out.println("Here are the options for two number entry:");
+            System.out.println("1: Addition\n2: Subtraction\n3: Multiplication\n4: Division");
+            selection = scanner.nextInt();
+
+            while(selection < 1 || selection > 4){
+                System.out.println("Sorry! That isn't a valid entry. Please enter 1, 2, 3 or 4");
+                selection = scanner.nextInt();
+            }
+
+            System.out.println("Please enter the first number for your operation:");
+            float inputs[] = TakeTwoInputs();
+            float inputA = inputs[0];
+            float inputB = inputs[1];
+
+            switch(selection) {
+                case 1:
+                    output = add(inputA, inputB);
+                    PrintResult(output);
+                    break;
+                case 2:
+                    output = subtract(inputA, inputB);
+                    PrintResult(output);
+                    break;
+                case 3:
+                    output = multiply(inputA, inputB);
+                    PrintResult(output);
+                    break;
+                case 4:
+                    output = divide(inputA, inputB);
+                    PrintResult(output);
+                default:
+                    break;
+            }
+        }
+        return output;
     }
 
-    public boolean shouldTryAgain(Float num) {
-        System.out.println("You entered: " + num.toString() + ", would you like to try again? (y/N)");
+    public float TakeOneInput(){
+        float inputA;
+        do {
+            inputA = scanner.nextFloat();
+        } while(shouldAskAgain(inputA));
+        return inputA;
+    }
+
+    public float[] TakeTwoInputs(){
+
+        float inputA;
+        do {
+            inputA = scanner.nextFloat();
+        } while(shouldAskAgain(inputA));
+        System.out.println("Please enter the second number:");
+        float inputB;
+        do {
+            inputB = scanner.nextFloat();
+        } while(shouldAskAgain(inputB));
+        float[] inputs = {inputA, inputB};
+        return inputs;
+    }
+
+    public boolean shouldAskAgain(Float num) {
+        System.out.println("You entered: " + num.toString() + ", would you like to enter a new number? (y/N)");
         String res = scanner.next();
         return res.toLowerCase().contains("y");
     }
 
-    // Returns an array of 2 floats from the user.
-    // Scanner is a Scanner with the input stream
-    public Float[] get2Floats() {
-        Float[] result = new Float[2];
+    public int RunCalculator(){
+        int option;
+        System.out.println("Please enter selection:\n1: Get Operation List\n2: Quit");
+        option = scanner.nextInt();
 
-        result[0] = get1FloatUndoable("first");
-        result[1] = get1FloatUndoable("second");
-
-        return result;
-    }
-
-    // Gets a float but also asks if it's the right number.
-    // Scanner is a Scanner with the input stream
-    // numOrder is used in the prompt to specify the order of number. Ex. 'first'
-    // when numOrder == "", no number order is used.
-    public float get1FloatUndoable(String numOrder) {
-        float res = -1;
-        do {
-            res = getFloat(numOrder);
-        } while(shouldTryAgain(res));
-
-        return res;
-    }
-
-    // Returns a float from the user
-    // Takes the scanner and the numbers order. Ex. 'first'
-    // when numOrder == "", no number order is used.
-    public float getFloat(String numOrder) {
-        if (numOrder.equals("")) {
-            System.out.println("Please enter the number (float): ");
-        } else {
-            System.out.println("Please enter the " + numOrder + " number (float): ");
+        while(option != 2 && option != 1){
+            System.out.println("Sorry you have entered an invalid option. Please select 1 or 2.");
+            System.out.println(option);
+            option = scanner.nextInt();
         }
-        return scanner.nextFloat();
+
+        if(option == 1){
+            GetOperation();
+            return 1;
+        }else{
+            calculating = false;
+            return 0;
+        }
     }
 
-    public float add(float a, float b) { return a+b; }
-    public float subtract(float a, float b) { return a-b; }
-    public float multiply(float a, float b) {
-        return a*b;
+    public void doCalculations() {
+        calculating = true;
+        do {
+            RunCalculator();
+        } while(calculating);
     }
-    public float divide(float a, float b) { return a/b; }
-    public float sqrt(float a) { return (float)Math.sqrt(a); }
-    public float square(float a) { return a*a; }
-    public float cube(float a) { return a*a*a; }
 
+    public static void PrintResult(float output){
+        System.out.println("The result is " + output + "\n\n");
+    }
+
+    public static void main(String args[]){
+        Calculator calculator = new Calculator(System.in);
+        calculator.doCalculations();
+        System.out.println("Thanks for using this calculator!...");
+        System.out.println("Bye.");
+    }
 }

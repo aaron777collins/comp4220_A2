@@ -13,7 +13,7 @@ public class EnterNumTest {
 
     @Test
     void enterNumbersTest() {
-        String input = "a\n1.0\nn\n2.0\nn\ne\n";
+        String input = "1\n1\n1\n2\nn\n1\n2\n1\n2.0\nn\n4.0\nn\n2\n";
         InputStream mockInputStream = new ByteArrayInputStream(input.getBytes());
         Calculator calculator = new Calculator(mockInputStream);
 
